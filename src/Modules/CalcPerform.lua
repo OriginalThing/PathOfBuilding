@@ -534,7 +534,7 @@ function doActorLifeManaReservation(actor)
 		for _, value in ipairs(modDB:List(nil, "GrantReserved"..pool.."AsAura")) do
 			local auraMod = copyTable(value.mod)
 			auraMod.value = m_floor(auraMod.value * m_min(reserved, max))
-			modDB:NewMod("ExtraAura", "LIST", { mod = auraMod })
+			modDB:ReplaceMod("ExtraAura", "LIST", { mod = auraMod })
 		end
 	end
 end
