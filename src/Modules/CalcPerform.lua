@@ -3150,6 +3150,15 @@ function calcs.perform(env, skipEHP)
 		enemyDB:ReplaceMod("Multiplier:ImpaleStacks", "BASE", maxImpaleStacks, "Config", { type = "Condition", var = "Combat" })
 	end
 
+	-- Foulborn Choir of the Storm, needs to be after main auras (incase purity of lightning/elements auras) but before extra auras (Radiant Faith)
+	if modDB:Flag(nil, "ManaIncreasedByOvercappedLightningRes") then
+		-- Calclate defences for ManaIncreasedByOvercappedLightningRes
+		calcs.defence(env, env.player)
+		-- Set the life/mana reservations again as we now have increased mana from overcapped lightning resistance
+		doActorLifeMana(env.player)
+		doActorLifeManaReservation(env.player)
+	end
+
 	-- Check for extra auras
 	buffExports["Aura"]["extraAura"] = { effectMult = 1, modList = new("ModList") }
 	for _, value in ipairs(modDB:List(nil, "ExtraAura")) do
