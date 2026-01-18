@@ -632,7 +632,7 @@ function calcs.defence(env, actor)
 			}
 		end
 	end
-
+	-- Formless Inferno
 	if actor == env.minion then
 		doActorLifeMana(env.minion)
 		doActorLifeManaReservation(env.minion)
